@@ -2,11 +2,13 @@ const gameBoard = (() => {
     const row = 3;
     const col = 3;
     const cel = [];
+    let counter = 0;
 
     for (let i = 0; i < row; i++) {
         cel[i] = [];
         for (let j = 0; j < col; j++) {
-            cel[i].push([]);
+            cel[i].push(counter);
+            counter++;
         }
     }
 
@@ -15,17 +17,28 @@ const gameBoard = (() => {
     const getCell = (indexOne, indexTwo) => cel[indexOne][indexTwo];
 
     const drawBoard = () => cel.forEach((row) => {
-        row.forEach((col) => {
+        row.forEach(col => {
             const main = document.querySelector("main");
             const square = document.createElement("div");
+            square.setAttribute("id", `${col}`);
             main.appendChild(square);
         })
     })
 
-    return { getBoard, getCell, drawBoard }
+    const drawMark = (/* player */) => {
+        const square = document.querySelectorAll("div");
+        square.forEach(box => {
+            box.addEventListener("click", () => {
+                console.log(box.id);
+            })
+        })
+    }
+
+    return { getBoard, getCell, drawBoard, drawMark }
 })();
 
 gameBoard.drawBoard();
+gameBoard.drawMark();
 
 //players factory
 const playerFactory =  (name) => {
