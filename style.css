@@ -16,3 +16,13 @@ main {
 main div {
     border: solid;
 }
+
+main div[value="1"] {
+    border: solid;
+    background-color: red;
+}
+
+main div[value="2"] {
+    border: solid;
+    background-color: blue;
+}

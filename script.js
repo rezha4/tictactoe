@@ -21,15 +21,17 @@ const gameBoard = (() => {
             const main = document.querySelector("main");
             const square = document.createElement("div");
             square.setAttribute("id", `${col}`);
+            square.setAttribute("value", "0");
             main.appendChild(square);
         })
     })
 
-    const drawMark = (/* player */) => {
+    const drawMark = (player) => {
         const square = document.querySelectorAll("div");
         square.forEach(box => {
             box.addEventListener("click", () => {
-                console.log(box.id);
+                box.setAttribute("value", player);
+                //get the id and put it inside player
             })
         })
     }
@@ -38,7 +40,7 @@ const gameBoard = (() => {
 })();
 
 gameBoard.drawBoard();
-gameBoard.drawMark();
+gameBoard.drawMark(1);
 
 //players factory
 const playerFactory =  (name) => {
