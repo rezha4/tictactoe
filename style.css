@@ -4,7 +4,7 @@ html body {
 
 main {
     margin: 0 auto;
-    height: 50vh;
+    height: 50vh; /* need to implement clamp or min max */
     width: 50vw;
 
     display: grid;

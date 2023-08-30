@@ -6,7 +6,7 @@ const gameBoard = (() => {
     for (let i = 0; i < row; i++) {
         cel[i] = [];
         for (let j = 0; j < col; j++) {
-            cel[i].push("X");
+            cel[i].push([]);
         }
     }
 
@@ -14,8 +14,18 @@ const gameBoard = (() => {
 
     const getCell = (indexOne, indexTwo) => cel[indexOne][indexTwo];
 
-    return { getBoard, getCell }
+    const drawBoard = () => cel.forEach((row) => {
+        row.forEach((col) => {
+            const main = document.querySelector("main");
+            const square = document.createElement("div");
+            main.appendChild(square);
+        })
+    })
+
+    return { getBoard, getCell, drawBoard }
 })();
+
+gameBoard.drawBoard();
 
 //players factory
 const playerFactory =  (name) => {
