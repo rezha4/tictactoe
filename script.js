@@ -38,22 +38,25 @@ const gameBoard = (() => {
                         playerOneScore.push(box.id);
                         box.setAttribute("value", "1");
                         turnBaseCounter++;
-                        console.log(playerOneScore);
+                        gameBoard.checkWinner();
                     } else if (turnBaseCounter % 2 != 0) {
                         box.setAttribute("value", "2");
                         turnBaseCounter++;
                     }
-                } else {
-
-                }
-                console.log(turnBaseCounter)
-                
-                //get the id and put it inside player
+                } else { }
+                console.log(playerOneScore)
             })
         })
     }
 
-    return { getBoard, getCell, drawBoard, drawMark }
+    const checkWinner = () => {
+        let hor = [0, 1, 2]
+        if (playerOneScore.every(i => hor.includes(i))) {
+            console.log("WIN");
+        }
+    }
+
+    return { getBoard, getCell, drawBoard, drawMark, checkWinner }
 })();
 
 //players factory
