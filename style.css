@@ -1,3 +1,18 @@
 html body {
     margin: 0;
 }
+
+main {
+    margin: 0 auto;
+    height: 50vh;
+    width: 50vw;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    border: solid;
+}
+
+main div {
+    border: solid;
+}
