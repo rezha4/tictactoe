@@ -26,11 +26,28 @@ const gameBoard = (() => {
         })
     })
 
-    const drawMark = (player) => {
+    let turnBaseCounter = 0;
+    let playerOneScore = [];
+
+    const drawMark = () => {
         const square = document.querySelectorAll("div");
         square.forEach(box => {
             box.addEventListener("click", () => {
-                box.setAttribute("value", player);
+                if (box.getAttribute("value") == "0") {
+                    if (turnBaseCounter % 2 == 0) {
+                        playerOneScore.push(box.id);
+                        box.setAttribute("value", "1");
+                        turnBaseCounter++;
+                        console.log(playerOneScore);
+                    } else if (turnBaseCounter % 2 != 0) {
+                        box.setAttribute("value", "2");
+                        turnBaseCounter++;
+                    }
+                } else {
+
+                }
+                console.log(turnBaseCounter)
+                
                 //get the id and put it inside player
             })
         })
@@ -39,19 +56,34 @@ const gameBoard = (() => {
     return { getBoard, getCell, drawBoard, drawMark }
 })();
 
-gameBoard.drawBoard();
-gameBoard.drawMark(1);
-
 //players factory
-const playerFactory =  (name) => {
+const playerFactory =  (name, playerMark) => {
+    let playerCount = 0;
+
     const getPlayerName = () => name;
 
-    return { getPlayerName }
+    const playerTurn = () => gameBoard.drawMark(2);
+
+    const mark = () => playerMark;
+
+    let playerScore = [];
+
+    return { getPlayerName, playerTurn, mark, playerScore }
 }
 
-const playerOne = playerFactory("rezha");
-
 //displayController module
+const gameMaster = (() => {
+    gameBoard.drawBoard();
+
+    const playerOne = playerFactory("rezha", 1);
+    const playerTwo = playerFactory("computer", 2);
+
+    let turnCount = 0;
+
+    return { playerOne, playerTwo }
+})();
+
+gameBoard.drawMark();
 
 //render gameBoard.getBoard() with DOM to HTML
 
