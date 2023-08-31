@@ -36,21 +36,21 @@ const gameBoard = (() => {
         const dia0 = ["0", "4", "8"];
         const dia1 = ["2", "4", "6"];
         if (hor0.every(i => player.includes(i))) {
-            console.log(`${player} WIN`);
+            annouceWinner(player);
         } else if (hor1.every(i => player.includes(i))) {
-            console.log(`${player} WIN`);
+            annouceWinner(player);
         } else if (hor2.every(i => player.includes(i))) {
-            console.log(`${player} WIN`);
+            annouceWinner(player);
         } else if (ver0.every(i => player.includes(i))) {
-            console.log(`${player} WIN`);
+            annouceWinner(player);
         } else if (ver1.every(i => player.includes(i))) {
-            console.log(`${player} WIN`);
+            annouceWinner(player);
         } else if (ver2.every(i => player.includes(i))) {
-            console.log(`${player} WIN`);
+            annouceWinner(player);
         } else if (dia0.every(i => player.includes(i))) {
-            console.log(`${player} WIN`);
+            annouceWinner(player);
         } else if (dia1.every(i => player.includes(i))) {
-            console.log(`${player} WIN`);
+            annouceWinner(player);
         } 
     }
 
@@ -72,6 +72,28 @@ const gameBoard = (() => {
                     }
                 } else { }
             })
+        })
+    }
+
+    const resetBoard = () => {
+        while (document.querySelector("main").firstChild) {
+            document.querySelector("main").removeChild(document.querySelector("main").firstChild);
+        }
+        drawBoard();
+        drawMark();
+        turnBaseCounter = 1;
+        playerOneScore = [];
+        playerTwoScore = [];
+    }
+
+    const annouceWinner = (player) => {
+        setTimeout(() => {
+            document.querySelector("dialog").showModal();
+        }, 100)
+        document.querySelector("button").addEventListener("click", (event) => {
+            event.preventDefault();
+            document.querySelector("dialog").close();
+            resetBoard();
         })
     }
 
