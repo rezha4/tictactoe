@@ -26,13 +26,32 @@ const gameBoard = (() => {
     let playerOneScore = [];
     let playerTwoScore = [];
 
-    const checkWinner = () => {
-        let hor = ["0", "1", "2"];
-        if (hor.every(i => playerOneScore.includes(i))) {
-            console.log("WIN");
-        } else {
-            console.log("No winner yet...")
-        }
+    const checkWinner = (player) => {
+        const hor0 = ["0", "1", "2"];
+        const hor1 = ["3", "4", "5"];
+        const hor2 = ["6", "7", "8"];
+        const ver0 = ["0", "3", "6"];
+        const ver1 = ["1", "4", "7"];
+        const ver2 = ["2", "5", "8"];
+        const dia0 = ["0", "4", "8"];
+        const dia1 = ["2", "4", "6"];
+        if (hor0.every(i => player.includes(i))) {
+            console.log(`${player} WIN`);
+        } else if (hor1.every(i => player.includes(i))) {
+            console.log(`${player} WIN`);
+        } else if (hor2.every(i => player.includes(i))) {
+            console.log(`${player} WIN`);
+        } else if (ver0.every(i => player.includes(i))) {
+            console.log(`${player} WIN`);
+        } else if (ver1.every(i => player.includes(i))) {
+            console.log(`${player} WIN`);
+        } else if (ver2.every(i => player.includes(i))) {
+            console.log(`${player} WIN`);
+        } else if (dia0.every(i => player.includes(i))) {
+            console.log(`${player} WIN`);
+        } else if (dia1.every(i => player.includes(i))) {
+            console.log(`${player} WIN`);
+        } 
     }
 
     const drawMark = () => {
@@ -44,17 +63,14 @@ const gameBoard = (() => {
                         playerOneScore.push(box.id);
                         box.setAttribute("value", "1");
                         turnBaseCounter++;
-                        checkWinner();
+                        checkWinner(playerOneScore);
                     } else {
                         playerTwoScore.push(box.id);
                         box.setAttribute("value", "2");
                         turnBaseCounter++;
-                        checkWinner();
+                        checkWinner(playerTwoScore);
                     }
                 } else { }
-                console.log(turnBaseCounter);
-                console.log(playerOneScore);
-                console.log(playerTwoScore);
             })
         })
     }
@@ -63,16 +79,9 @@ const gameBoard = (() => {
     drawMark();
 })();
 
-const playerFactory =  (name, playerMark) => {
-    let playerCount = 0;
+const playerFactory =  (name) => {
 
     const getPlayerName = () => name;
 
-    const playerTurn = () => gameBoard.drawMark(2);
-
-    const mark = () => playerMark;
-
-    let playerScore = [];
-
-    return { getPlayerName, playerTurn, mark, playerScore }
+    return { getPlayerName }
 }
