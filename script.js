@@ -12,10 +12,6 @@ const gameBoard = (() => {
         }
     }
 
-    const getBoard = () => cel;
-
-    const getCell = (indexOne, indexTwo) => cel[indexOne][indexTwo];
-
     const drawBoard = () => cel.forEach((row) => {
         row.forEach(col => {
             const main = document.querySelector("main");
@@ -26,40 +22,47 @@ const gameBoard = (() => {
         })
     })
 
-    let turnBaseCounter = 0;
+    let turnBaseCounter = 1;
     let playerOneScore = [];
+    let playerTwoScore = [];
+
+    const checkWinner = () => {
+        let hor = ["0", "1", "2"];
+        if (hor.every(i => playerOneScore.includes(i))) {
+            console.log("WIN");
+        } else {
+            console.log("No winner yet...")
+        }
+    }
 
     const drawMark = () => {
         const square = document.querySelectorAll("div");
         square.forEach(box => {
             box.addEventListener("click", () => {
                 if (box.getAttribute("value") == "0") {
-                    if (turnBaseCounter % 2 == 0) {
+                    if (turnBaseCounter % 2 === 0) {
                         playerOneScore.push(box.id);
                         box.setAttribute("value", "1");
                         turnBaseCounter++;
-                        gameBoard.checkWinner();
-                    } else if (turnBaseCounter % 2 != 0) {
+                        checkWinner();
+                    } else {
+                        playerTwoScore.push(box.id);
                         box.setAttribute("value", "2");
                         turnBaseCounter++;
+                        checkWinner();
                     }
                 } else { }
-                console.log(playerOneScore)
+                console.log(turnBaseCounter);
+                console.log(playerOneScore);
+                console.log(playerTwoScore);
             })
         })
     }
 
-    const checkWinner = () => {
-        let hor = [0, 1, 2]
-        if (playerOneScore.every(i => hor.includes(i))) {
-            console.log("WIN");
-        }
-    }
-
-    return { getBoard, getCell, drawBoard, drawMark, checkWinner }
+    drawBoard();
+    drawMark();
 })();
 
-//players factory
 const playerFactory =  (name, playerMark) => {
     let playerCount = 0;
 
@@ -73,31 +76,3 @@ const playerFactory =  (name, playerMark) => {
 
     return { getPlayerName, playerTurn, mark, playerScore }
 }
-
-//displayController module
-const gameMaster = (() => {
-    gameBoard.drawBoard();
-
-    const playerOne = playerFactory("rezha", 1);
-    const playerTwo = playerFactory("computer", 2);
-
-    let turnCount = 0;
-
-    return { playerOne, playerTwo }
-})();
-
-gameBoard.drawMark();
-
-//render gameBoard.getBoard() with DOM to HTML
-
-//build functions for clicking that board cell then
-//marking it with the player's symbol
-
-//hint: each little piece of cuntionality should be able to fit in
-//the game, player or gameboard objects.
-
-//build logic that check for game over (3 in a row & tie)
-
-//input for player names
-//button for start/restart the game
-//add a display element that congratulate winning player
