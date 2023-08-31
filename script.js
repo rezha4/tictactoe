@@ -35,6 +35,11 @@ const gameBoard = (() => {
         const ver2 = ["2", "5", "8"];
         const dia0 = ["0", "4", "8"];
         const dia1 = ["2", "4", "6"];
+        const divs = document.querySelectorAll("div");
+        let divsVal = [];
+        divs.forEach(div => {
+            divsVal.push(div.getAttribute("value"));
+        });
         if (hor0.every(i => player.includes(i))) {
             annouceWinner(player);
         } else if (hor1.every(i => player.includes(i))) {
@@ -51,7 +56,15 @@ const gameBoard = (() => {
             annouceWinner(player);
         } else if (dia1.every(i => player.includes(i))) {
             annouceWinner(player);
-        } 
+        } else if (!divsVal.includes("0")) {
+            setTimeout(() => {
+                alert("TIE");
+            }, 500);
+            setTimeout(() => {
+                resetBoard();
+            }, 500);
+        }
+        console.log(divsVal)
     }
 
     const drawMark = () => {
