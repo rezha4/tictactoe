@@ -4,8 +4,8 @@ html body {
 
 main {
     margin: auto;
-    height: 50vh; /* need to implement clamp or min max */
-    width: 50vw;
+    height: 320px;
+    width: 320px;
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
